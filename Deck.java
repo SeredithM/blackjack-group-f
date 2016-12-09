@@ -1,3 +1,5 @@
+package blackjackGroup;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,12 +12,10 @@ public class Deck {
   instantiateDeck();
  }
   
- public void Deal(){
-   // int size = numOfPlayers();
-  // for(int i = 0; i< size;i++);{
-   //giveCard(deck.get(0));
-   //deck.remove(0)
-   //}
+ public void giveCard(Player dealt){
+    dealt.addCard(cards.get(0));
+    cards.remove(0);
+   
  }
  
  private void instantiateDeck() {
@@ -42,7 +42,7 @@ public class Deck {
   */
  /* public void shuffle() {
   Collections.shuffle(this.cards, new Random());
- }
+ }*/
  
  /**
   * Puts all cards in the discard pile back into the deck, then shuffles the deck.

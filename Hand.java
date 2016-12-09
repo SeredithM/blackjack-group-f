@@ -1,3 +1,5 @@
+package blackjackGroup;
+
 import java.util.ArrayList;
 
 public class Hand { //constructor
