@@ -1,4 +1,4 @@
-import java.util.Scanner;
+package blackjackGroup;
 
 import java.util.*;
 
@@ -54,8 +54,23 @@ public class Player{
   }
   
   }
-  public void giveCard(Card card){
+  
+  /**
+   * Adds a card to the Player's hand
+   * @param card is the Card object to add to the player hand.
+   */
+  public void addCard(Card card){
    hand.add(card);
   }
+  
+  /**
+   * Returns the name of the Player.
+   * @return a String that is the name of the player
+   */
+  public String getName() {
+	  return this.name;
+  }
+  
+  
   
 }

@@ -1,3 +1,8 @@
+package blackjackGroup;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Card {
 
  private static String[] ranks = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "X", "J", "Q", "K", "A"};
@@ -82,6 +87,52 @@ public class Card {
   
   return new Card(nextRank, nextSuit);
  }
+ 
+ public static void printHand(ArrayList<Card> hand) {
+	  	
+	  	//First row
+	  	for (Card curCard : hand) {System.out.print("┌───┐ ");}
+	  	System.out.println();
+	  	
+	  	//Second row
+	  	for (Card curCard : hand) {System.out.print("|" + curCard.getRank() + "  | ");}
+	  	System.out.println();
+	  	
+	  	//Third row
+	  	for (Card curCard : hand) {System.out.print("| " + getASCIISuit(curCard.getSuit()) + " | ");}
+	  	System.out.println();
+	  	
+	  	//Fourth row
+	  	for (Card curCard : hand) {System.out.print("|  " + curCard.getRank() + "| ");}
+	  	System.out.println();
+	  	
+	  	//Fifth row
+	  	for (Card curCard : hand) {System.out.print("└───┘ ");}
+	  	System.out.println();
+}
+ 
+/**
+ * Returns an ASCII representation of a Card suit
+ * @param inSuit: The suit being represented
+ * @return
+ */
+private static String getASCIISuit(String inSuit) {
+ 	String uniSuit = inSuit;
+ 	switch (uniSuit) {
+ 	case "s": uniSuit = "\u2660";
+ 	  break;
+ 	case "h": uniSuit = "\u2665";
+		  break;
+ 	case "d": uniSuit = "\u2666";
+		  break;
+ 	case "c": uniSuit = "\u2663";
+		  break;
+		 default: uniSuit = "?";
+		  break;
+ 	}
+ 	
+ 	return uniSuit;
+}
  
  /**
   * Returns a copy of a given card
