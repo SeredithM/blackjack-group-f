@@ -114,7 +114,7 @@ public class Game {
 				}
 			}
 			
-			if (closest != 0) {
+			if (closest != 0 && winner != -1) {
 				System.out.println("Player " + gamePlayers.get(winner).getName() + " wins!");
 				winnings();
 			}
