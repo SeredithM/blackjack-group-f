@@ -9,6 +9,7 @@ public class Game {
 	private List<Player> gamePlayers;
 	private Dealer gameDealer;
 	private Deck gameDeck;
+	private int bettingPool = 0;
 	
 	public void startGame() {
 		
@@ -26,6 +27,11 @@ public class Game {
 			playerName = playerScan.next();
 			Player curPlayer = new Player(playerName);
 			gamePlayers.add(curPlayer);
+			int bet = 0;
+			System.out.println("How much will they bet?");
+			bet = playerScan.nextInt();
+			gamePlayers.get(i).setBet(bet);
+			bettingPool += bet;
 		}
 		
 		gameDealer = new Dealer();
@@ -80,6 +86,7 @@ public class Game {
 					}
 					else if(checkVal(i) == 0) {
 						System.out.println("Player " + gamePlayers.get(i).getName() + " wins!");
+						winnings();
 						turnGoing = false;
 						break;
 					}
@@ -101,6 +108,7 @@ public class Game {
 				
 				if(checkPoints == 0) {
 					System.out.println("Player " + gamePlayers.get(i).getName() + " wins!");
+					winnings();
 					winner = i;
 					closest = 0;
 				}
@@ -108,6 +116,7 @@ public class Game {
 			
 			if (closest != 0) {
 				System.out.println("Player " + gamePlayers.get(winner).getName() + " wins!");
+				winnings();
 			}
 			
 			if (winner > -1) {
@@ -118,6 +127,7 @@ public class Game {
 			
 			if(gamePlayers.size() == 0) {
 				System.out.println("Dealer wins!");
+				winnings();
 				gameGoing = false;
 			}
 			
@@ -138,5 +148,9 @@ public class Game {
 		int curVal = Hand.getTotalPoints(gamePlayers.get(playerNum).hand);
 		
 		return 21 - curVal;
+	}
+	
+	public void winnings() {
+		System.out.println("The winner wins " + bettingPool + " in chips!");
 	}
 }
