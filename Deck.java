@@ -1,5 +1,9 @@
+package blackjackGroup;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class Deck {
 
@@ -10,16 +14,22 @@ public class Deck {
   instantiateDeck();
  }
   
- public void Deal(){
-   // int size = numOfPlayers();
-  // for(int i = 0; i< size;i++);{
-   //giveCard(deck.get(0));
-   //deck.remove(0)
-   //}
+ public void giveCard(Player dealt){
+    dealt.addCard(cards.get(0));
+    discard.add(cards.get(0));
+    cards.remove(0);
+   
+ }
+ 
+ public void giveCard(Dealer dealt){
+	 dealt.dealerHand.add(cards.get(0));
+	 discard.add(cards.get(0));
+	 cards.remove(0);
  }
  
  private void instantiateDeck() {
   this.cards = new ArrayList<Card>();
+  this.discard = new ArrayList<Card>();
   Card curCard = new Card();
   cards.add(curCard);
   
@@ -40,7 +50,7 @@ public class Deck {
  /**
   * Shuffles all cards not in the discard pile.
   */
- /* public void shuffle() {
+  public void shuffle() {
   Collections.shuffle(this.cards, new Random());
  }
  

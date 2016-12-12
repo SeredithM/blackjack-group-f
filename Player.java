@@ -1,4 +1,4 @@
-import java.util.Scanner;
+package blackjackGroup;
 
 import java.util.*;
 
@@ -7,17 +7,26 @@ public class Player{
   String inpUser;
   private int inpInt;
   private int num = 0;
+  public int points;
   public int balance = 0;
   private String name;
   ArrayList<Card> hand;
   
   public Player(){
     balance = 25000;
+    hand = new ArrayList<Card>();
+  }
+  
+  public Player(String name) {
+	  this.name = name;
+	  this.balance = 2500;
+	  hand = new ArrayList<Card>();
   }
   
   public Player(String n, int b){
     name = n;
     balance =b;
+    hand = new ArrayList<Card>();
   }
   
   public void bet(){
@@ -54,8 +63,26 @@ public class Player{
   }
   
   }
-  public void giveCard(Card card){
-   hand.add(card);
+  
+  /**
+   * Adds a card to the Player's hand
+   * @param card is the Card object to add to the player hand.
+   */
+  public void addCard(Card card){
+   this.hand.add(card);
+   points += card.getValue();
+  }
+  
+  /**
+   * Returns the name of the Player.
+   * @return a String that is the name of the player
+   */
+  public String getName() {
+	  return this.name;
+  }
+  
+  public void printHand() {
+	  Hand.printHand(this.hand);
   }
   
 }

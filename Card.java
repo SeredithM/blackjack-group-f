@@ -1,8 +1,10 @@
+package blackjackGroup;
+
 public class Card {
 
- private static String[] ranks = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "X", "J", "Q", "K", "A"};
+ private static String[] ranks = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "X", "J", "Q", "K"};
  private static String[] suits = {"s", "h", "d", "c"};
- private static int[] pointValues = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11};
+ private static int[] pointValues = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10};
  
  private int rank;
  private int suit;
@@ -26,7 +28,7 @@ public class Card {
  public Card(int newRank, int newSuit) {
   this.rank = newRank;
   this.suit = newSuit;
-  this.pointVal = pointValues[newRank%14];
+  this.pointVal = pointValues[newRank%13];
  }
  
  /**
@@ -82,6 +84,31 @@ public class Card {
   
   return new Card(nextRank, nextSuit);
  }
+ 
+ 
+ 
+/**
+ * Returns an ASCII representation of a Card suit
+ * @param inSuit: The suit being represented
+ * @return
+ */
+public static String getASCIISuit(String inSuit) {
+ 	String uniSuit = inSuit;
+ 	switch (uniSuit) {
+ 	case "s": uniSuit = "\u2660";
+ 	  break;
+ 	case "h": uniSuit = "\u2665";
+		  break;
+ 	case "d": uniSuit = "\u2666";
+		  break;
+ 	case "c": uniSuit = "\u2663";
+		  break;
+		 default: uniSuit = "?";
+		  break;
+ 	}
+ 	
+ 	return uniSuit;
+}
  
  /**
   * Returns a copy of a given card
