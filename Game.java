@@ -34,6 +34,8 @@ public class Game {
 		
 		while(gameGoing) {
 			
+			
+			
 			for(int n = 0; n < 2; n++) {
 				for (int i = 0; i < gamePlayers.size(); i++) {
 					deal(i);
@@ -45,8 +47,16 @@ public class Game {
 				String isHitting = "";
 				boolean turnGoing = true;
 				
-				
 				while (turnGoing) {
+					if(checkVal(i) < 0) {
+						System.out.println("Player " + gamePlayers.get(i).getName() + " has gone bust!");
+						gamePlayers.get(i).printHand();
+						gamePlayers.remove(i);
+						i--;
+						turnGoing = false;
+						break;
+					}
+					System.out.println("Points away from 21: " + checkVal(i));
 					System.out.println("Does " + gamePlayers.get(i).getName() + " want to hit? (y/n)");
 					gamePlayers.get(i).printHand();
 					isHitting = playerScan.next();
@@ -64,6 +74,14 @@ public class Game {
 					if(checkVal(i) < 0) {
 						System.out.println("Player " + gamePlayers.get(i).getName() + " has gone bust!");
 						gamePlayers.get(i).printHand();
+						gamePlayers.remove(i);
+						i--;
+						turnGoing = false;
+					}
+					else if(checkVal(i) == 0) {
+						System.out.println("Player " + gamePlayers.get(i).getName() + " wins!");
+						turnGoing = false;
+						break;
 					}
 				}
 				
@@ -71,18 +89,25 @@ public class Game {
 			
 			
 			int winner = -1;
+			int closest = 21;
 			
-			for (int i = 0; i < numPlayers; i++) {
+			for (int i = 0; i < gamePlayers.size(); i++) {
 				int checkPoints = checkVal(i);
 				
-				if (checkPoints < 0) {
-					System.out.println("Player " + gamePlayers.get(i).getName() + " loses.");
-					gamePlayers.remove(i);
+				if (checkPoints < closest) {
+					winner = i;
+					closest = checkPoints;
 				}
-				else if(checkPoints == 21) {
+				
+				if(checkPoints == 0) {
 					System.out.println("Player " + gamePlayers.get(i).getName() + " wins!");
 					winner = i;
+					closest = 0;
 				}
+			}
+			
+			if (closest != 0) {
+				System.out.println("Player " + gamePlayers.get(winner).getName() + " wins!");
 			}
 			
 			if (winner > -1) {
@@ -91,8 +116,14 @@ public class Game {
 				gameGoing = false;
 			}
 			
-			playerScan.close();
+			if(gamePlayers.size() == 0) {
+				System.out.println("Dealer wins!");
+				gameGoing = false;
+			}
+			
+			
 		}
+		playerScan.close();
 	}
 	
 	public void deal(int playerNum) {
